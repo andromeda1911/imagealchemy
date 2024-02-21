@@ -1,8 +1,9 @@
 'use server'
+import { UpdateQuery } from "mongoose";
 import { connectToDb } from "../database/mongoose";
 import User from "../models/user.model";
 
-export const createUser = async (user) => {
+export const createUser = async (user: any) => {
   try {
     await connectToDb();
     const newUser = await User.create(user);
@@ -12,7 +13,7 @@ export const createUser = async (user) => {
   }
 };
 
-export const getUserById = async(userId) => {
+export const getUserById = async(userId: any) => {
     try {
         await connectToDb();
         const user = await User.findOne({clerkId: userId});
@@ -23,7 +24,7 @@ export const getUserById = async(userId) => {
     }
 }
 
-export const updateUser = async(clerkId, user) => {
+export const updateUser = async(clerkId: any, user: UpdateQuery<any> | undefined) => {
     try {
         await connectToDb();
         const updatedUser = await User.findByIdAndUpdate({clerkId}, user, {new: true});
@@ -34,7 +35,7 @@ export const updateUser = async(clerkId, user) => {
     }
 }
 
-export const deleteUser = async(clerkId) => {
+export const deleteUser = async(clerkId: any) => {
     try {
         await connectToDb();
         const userToDelete = await User.findOne({clerkId});
@@ -46,7 +47,7 @@ export const deleteUser = async(clerkId) => {
     }
 }
 
-export const updateCredits = async(userId, credits) => {
+export const updateCredits = async(userId: any, credits: any) => {
     try {
         await connectToDb();
         const updated = await User.findByIdAndUpdate({_id: userId}, {$inc: {creditBalance: credits}}, {new: true})
