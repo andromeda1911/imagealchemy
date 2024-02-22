@@ -21,7 +21,9 @@ export const connectToDb = async () => {
 
     if(!MONGODB_URL) throw new Error('MONGO DB url is mising');
 
-    cached.promise = cached.promise || mongoose.connect(MONGODB_URL, { dbName: 'imagealchemy', bufferCommands: false });
+    cached.promise = cached.promise || mongoose.connect(MONGODB_URL, { 
+        dbName: 'imagealchemy', bufferCommands: false 
+      })
 
     cached.conn = await cached.promise;
     console.log('conn value', cached.conn);
