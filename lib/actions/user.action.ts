@@ -8,7 +8,7 @@ export const createUser = async (user: any) => {
   try {
     await connectToDb();
     const newUser = await User.create(user);
-    return JSON.parse(newUser);
+    return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
     console.log(error);
   }
